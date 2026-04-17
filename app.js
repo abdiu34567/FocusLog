@@ -80,7 +80,6 @@ async function submitData() {
             preloadedData.summary.totalScore += result.score;
         }
 
-        // 4. Trigger the background fetch anyway to keep everything in sync with the server
         setTimeout(() => fetchDataInBackground(true), 2000);
         // ------------------------------
 
