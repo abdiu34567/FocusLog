@@ -34,7 +34,6 @@
 </head>
 
 <body class="p-4 font-sans antialiased">
-
     <!-- Screen 1: Form -->
     <div id="form-screen" class="space-y-6">
         <header class="flex justify-between items-center">
@@ -47,23 +46,28 @@
             <div>
                 <label class="block text-xs font-semibold uppercase hint mb-1">Sleep & Wake</label>
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="time" id="sleep_time" value="22:00"
+                    <input type="time" id="sleep_time" value="21:00"
                         class="w-full p-3 rounded-xl border-none text-black">
-                    <input type="time" id="wake_time" value="05:30"
+                    <input type="time" id="wake_time" value="05:00"
                         class="w-full p-3 rounded-xl border-none text-black">
                 </div>
             </div>
 
             <h3>⚡ Productivity</h3>
-            <div class="card">
-                <div class="input-group">
-                    <label>Total Work Hours</label>
-                    <input type="number" id="work_hours" placeholder="e.g. 8"
-                        class="w-full p-3 rounded-xl border-none text-black">
+            <div class="card space-y-3">
+                <div>
+                    <label class="block text-[10px] font-bold uppercase hint mb-1">Total Work Hours</label>
+                    <input type="number" id="total_work" placeholder="e.g. 8"
+                        class="w-full p-3 rounded-xl border-none text-black bg-white">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold uppercase hint mb-1">What was your primary focus?</label>
+                    <input type="text" id="goal_description" placeholder="e.g. Finish the API logic"
+                        class="w-full p-3 rounded-xl border-none text-black bg-white">
                 </div>
                 <div class="flex justify-between items-center py-2">
-                    <span class="font-medium">Primary Goal Met?</span>
-                    <input type="checkbox" id="goal_met" checked class="w-6 h-6 rounded">
+                    <span class="font-medium text-sm">Primary Goal Met?</span>
+                    <input type="checkbox" id="goal_met" checked class="w-6 h-6 rounded border-none">
                 </div>
             </div>
 
@@ -84,9 +88,15 @@
 
     <!-- Screen 2: Results & History -->
     <div id="stats-screen" class="hidden space-y-6">
-        <header class="flex items-center">
-            <button onclick="showForm()" class="mr-4">←</button>
-            <h1 class="text-xl font-bold">Your Progress</h1>
+        <header class="flex justify-between items-center">
+            <div class="flex items-center">
+                <button onclick="showForm()" class="mr-4 text-xl">←</button>
+                <h1 class="text-xl font-bold text-slate-800">Your Progress</h1>
+            </div>
+            <button onclick="showStats(true)"
+                class="text-sm font-medium text-slate-400 active:text-blue-500 transition-colors">
+                Refresh ↻
+            </button>
         </header>
 
         <div id="summary-card" class="secondary-bg p-6 rounded-2xl text-center">
