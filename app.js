@@ -30,8 +30,12 @@ async function submitData() {
         const result = await response.json();
 
         tg.HapticFeedback.notificationOccurred('success');
-        alert(`Score: ${result.score}/5 - ${result.label}`);
-        showStats();
+
+        // Update and Show Success Overlay
+        document.getElementById('big-score').innerText = result.score + "/5";
+        document.getElementById('big-label').innerText = result.label;
+        document.getElementById('success-overlay').classList.remove('hidden');
+
     } catch (e) {
         alert("Error saving data. Check your API URL.");
         console.error(e);
@@ -67,4 +71,9 @@ async function showStats() {
 function showForm() {
     document.getElementById('stats-screen').classList.add('hidden');
     document.getElementById('form-screen').classList.remove('hidden');
+}
+
+function closeSuccess() {
+    document.getElementById('success-overlay').classList.add('hidden');
+    showStats(); // Automatically go to history after they click "Great!"
 }

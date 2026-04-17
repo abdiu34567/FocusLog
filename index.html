@@ -101,6 +101,18 @@
         </button>
     </div>
 
+
+    <!-- Success Overlay -->
+    <div id="success-overlay"
+        class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50">
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm text-center space-y-4 shadow-2xl">
+            <div id="big-score" class="text-6xl font-black text-blue-600">0/5</div>
+            <h2 id="big-label" class="text-xl font-bold">Strong Day!</h2>
+            <p class="hint text-sm">Log saved to Google Sheets</p>
+            <button onclick="closeSuccess()" class="tg-button w-full py-4 rounded-xl font-bold">Great!</button>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 
