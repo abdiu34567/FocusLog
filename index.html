@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FocusLog</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #222222);
+        }
+
+        .secondary-bg {
+            background-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
+        }
+
+        .tg-button {
+            background-color: var(--tg-theme-button-color, #248bcf);
+            color: var(--tg-theme-button-text-color, #ffffff);
+        }
+
+        .hint {
+            color: var(--tg-theme-hint-color, #999999);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--tg-theme-button-color, #248bcf);
+        }
+    </style>
+</head>
+
+<body class="p-4 font-sans antialiased">
+
+    <!-- Screen 1: Form -->
+    <div id="form-screen" class="space-y-6">
+        <header class="flex justify-between items-center">
+            <h1 class="text-xl font-bold">Daily Check-in</h1>
+            <button onclick="showStats()" class="text-sm font-medium"
+                style="color: var(--tg-theme-link-color)">History</button>
+        </header>
+
+        <section class="secondary-bg p-4 rounded-2xl space-y-4">
+            <div>
+                <label class="block text-xs font-semibold uppercase hint mb-1">Sleep & Wake</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="time" id="sleep_time" value="22:00"
+                        class="w-full p-3 rounded-xl border-none text-black">
+                    <input type="time" id="wake_time" value="05:30"
+                        class="w-full p-3 rounded-xl border-none text-black">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase hint mb-1">Work Hours (Deep / Total)</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" id="deep_work" placeholder="Deep"
+                        class="w-full p-3 rounded-xl border-none text-black">
+                    <input type="number" id="total_work" placeholder="Total"
+                        class="w-full p-3 rounded-xl border-none text-black">
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center py-2">
+                <span class="font-medium">Night Discipline?</span>
+                <input type="checkbox" id="discipline" checked class="w-6 h-6 rounded">
+            </div>
+
+            <input type="text" id="note" placeholder="Notes (optional)"
+                class="w-full p-3 rounded-xl border-none text-black">
+        </section>
+
+        <button id="submit-btn" onclick="submitData()"
+            class="tg-button w-full py-4 rounded-2xl font-bold shadow-lg active:scale-95 transition-transform">
+            Save Log
+        </button>
+    </div>
+
+    <!-- Screen 2: Results & History -->
+    <div id="stats-screen" class="hidden space-y-6">
+        <header class="flex items-center">
+            <button onclick="showForm()" class="mr-4">←</button>
+            <h1 class="text-xl font-bold">Your Progress</h1>
+        </header>
+
+        <div id="summary-card" class="secondary-bg p-6 rounded-2xl text-center">
+            <p class="hint text-sm uppercase font-bold tracking-widest">7-Day Score</p>
+            <div id="total-pts" class="text-4xl font-black my-2">0</div>
+            <p id="biggest-issue" class="text-sm text-red-500 font-medium"></p>
+        </div>
+
+        <div id="history-list" class="space-y-2">
+            <!-- Items injected here -->
+        </div>
+
+        <button onclick="showForm()" class="w-full py-4 rounded-2xl border-2 font-bold hint border-dashed">
+            Back to Check-in
+        </button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
