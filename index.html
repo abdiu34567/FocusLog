@@ -54,13 +54,16 @@
                 </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-semibold uppercase hint mb-1">Work Hours (Deep / Total)</label>
-                <div class="grid grid-cols-2 gap-3">
-                    <input type="number" id="deep_work" placeholder="Deep"
+            <h3>⚡ Productivity</h3>
+            <div class="card">
+                <div class="input-group">
+                    <label>Total Work Hours</label>
+                    <input type="number" id="work_hours" placeholder="e.g. 8"
                         class="w-full p-3 rounded-xl border-none text-black">
-                    <input type="number" id="total_work" placeholder="Total"
-                        class="w-full p-3 rounded-xl border-none text-black">
+                </div>
+                <div class="flex justify-between items-center py-2">
+                    <span class="font-medium">Primary Goal Met?</span>
+                    <input type="checkbox" id="goal_met" checked class="w-6 h-6 rounded">
                 </div>
             </div>
 

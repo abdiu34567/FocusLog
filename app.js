@@ -16,7 +16,6 @@ async function submitData() {
         userId: userId,
         sleep_time: document.getElementById('sleep_time').value,
         wake_time: document.getElementById('wake_time').value,
-        deep_work_hours: document.getElementById('deep_work').value,
         total_work_hours: document.getElementById('total_work').value,
         night_discipline: document.getElementById('discipline').checked,
         distraction_note: document.getElementById('note').value
