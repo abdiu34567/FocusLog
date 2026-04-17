@@ -8,7 +8,7 @@ tg.ready();
 const userId = tg.initDataUnsafe?.user?.id || "local_test_user";
 
 // Global variable to hold data in memory (Pre-loading)
-let preloadedData = { history: null, summary: null };
+let preloadedData = { history: [], summary: null };
 let isFetching = false;
 
 // 1. START PRE-LOADING IMMEDIATELY
@@ -105,14 +105,14 @@ function showStats(forceRefresh = false) {
     document.getElementById('form-screen').classList.add('hidden');
     document.getElementById('stats-screen').classList.remove('hidden');
 
-    // If data is already pre-loaded and we aren't forcing a refresh, show it instantly
-    if (!forceRefresh && preloadedData.history && preloadedData.summary) {
+    // If we have history data, show it immediately
+    if (preloadedData.history && preloadedData.history.length > 0) {
         renderHistory(preloadedData.history);
         renderSummary(preloadedData.summary);
     } else {
-        // If data isn't ready yet, show loading and fetch
-        document.getElementById('history-list').innerHTML = '<p class="text-center hint py-10">Fetching fresh data...</p>';
-        fetchDataInBackground().then(() => {
+        // Otherwise, show loading and fetch
+        document.getElementById('history-list').innerHTML = '<p class="text-center hint py-10">Fetching your logs...</p>';
+        fetchDataInBackground(true).then(() => {
             renderHistory(preloadedData.history);
             renderSummary(preloadedData.summary);
         });
@@ -159,6 +159,18 @@ function formatNiceDate(dateStr) {
 
 function renderHistory(history) {
     const list = document.getElementById('history-list');
+
+    // 1. Check if history is missing or not an array (Safety first)
+    if (!history || !Array.isArray(history)) {
+        list.innerHTML = '<p class="text-center hint py-10">Waiting for data...</p>';
+        return;
+    }
+
+    // 2. Check if the array is empty
+    if (history.length === 0) {
+        list.innerHTML = '<p class="text-center hint py-10">No logs found yet.</p>';
+        return;
+    }
 
     list.innerHTML = history.slice().reverse().map(item => {
         const isTrue = (val) => val === true || val === "true";
